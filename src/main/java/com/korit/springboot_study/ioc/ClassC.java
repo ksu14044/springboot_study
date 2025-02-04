@@ -1,4 +1,6 @@
 package com.korit.springboot_study.ioc;
 
-public class ClassC {
+public interface ClassC {
+
+     void classCallC();
 }
