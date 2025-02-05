@@ -11,6 +11,19 @@
         <result property="majorName" column="major_name" />
     </resultMap>
 
+    <insert id="insertMajor" keyProperty="majorId" useGeneratedKeys="true">
+        insert into
+            major_tb
+        values
+            (default, #{majorName})
+    </insert>
+    <insert id="insertInstructor" keyProperty="instructorId" useGeneratedKeys="true">
+        insert into
+            instructor_tb
+        values
+            (default, #{instructorName})
+    </insert>
+
     <select id="selectMajorsAll" resultMap="majorResultMap">
         select
             major_id,
