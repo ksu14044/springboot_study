@@ -56,12 +56,9 @@ public class StudentStudyService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public SuccessResponseDto<Major> updateMajor(int majorId, ReqUpdateMajorDto reqUpdateMajorDto) throws NullPointerException {
+    public SuccessResponseDto<Major> updateMajor(int majorId, ReqUpdateMajorDto reqUpdateMajorDto) throws NotFoundException,DuplicateKeyException {
         System.out.println("서비스 호출");
-        return new SuccessResponseDto<>(
-                studentStudyRepository
-                        .updateMajor(majorId, new Major(majorId, reqUpdateMajorDto.getMajorName()))
-                        .get()
-        );
+        Major modifiedMajor = studentStudyRepository.updateMajor(new Major(majorId, reqUpdateMajorDto.getMajorName())).orElseThrow(() -> new NotFoundException("해당 학과 ID는 존재하지 않습니다."));
+        return new SuccessResponseDto<>(modifiedMajor);
     }
 }

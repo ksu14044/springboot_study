@@ -58,16 +58,18 @@ public class StudentStudyRepository {
             return Optional.ofNullable(new Instructor(instructor.getInstructorId(), instructor.getInstructorName()));
     }
 
-    public Optional<Major> updateMajor(int majorId, Major major) {
+    public Optional<Major> updateMajor(Major major) throws DuplicateKeyException {
         try{
-            studentStudyMapper.updateMajor(major);
-        } catch (NullPointerException e) {
+            if(studentStudyMapper.updateMajor(major) < 1){
+                return Optional.empty();
+            };
+        } catch (DuplicateKeyException e) {
             throw new CustomNullPointException(
                     e.getMessage(),
-                    Map.of("majorName", "학과명을 입력하세요.")
+                    Map.of("majorName", "이미 존재하는 학과명입니다.")
             );
         }
-            return Optional.ofNullable(new Major(majorId, major.getMajorName()));
+            return Optional.ofNullable(major);
     }
 }
 
