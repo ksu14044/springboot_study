@@ -3,8 +3,6 @@ package com.korit.springboot_study.service;
 import com.korit.springboot_study.dto.request.study.ReqAddInstructorDto;
 import com.korit.springboot_study.dto.request.study.ReqAddMajorDto;
 import com.korit.springboot_study.dto.request.study.ReqUpdateMajorDto;
-import com.korit.springboot_study.dto.response.common.NotFoundResponseDto;
-import com.korit.springboot_study.dto.response.common.ResponseDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
 import com.korit.springboot_study.entity.study.Instructor;
 import com.korit.springboot_study.entity.study.Major;

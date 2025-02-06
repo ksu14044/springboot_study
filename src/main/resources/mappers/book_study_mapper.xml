@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.springboot_study.mapper.BookMapper">
+    <resultMap id="bookResultMap" type="com.korit.springboot_study.entity.Book">
+        <id property="bookId" column="book_id" />
+        <result property="bookName" column="book_name" />
+        <result property="authorId" column="author_id" />
+        <result property="publisherId" column="publisher_id"/>
+    </resultMap>
+
+    <insert id="addBook" keyProperty="bookId">
+        insert into
+            book_tb
+        values
+            (default, #{bookName}, #{authorId}, 0, 4000,  #{publisherId}, 'http://test.com')
+    </insert>
+
+    <select id="getBookByName" resultMap="bookResultMap">
+        select
+            *
+        from
+            book_tb
+        where
+        book_name like concat('%', #{bookName}, '%')
+    </select>
+</mapper>
