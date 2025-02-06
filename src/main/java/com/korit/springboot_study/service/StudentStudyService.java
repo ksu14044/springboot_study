@@ -2,6 +2,7 @@ package com.korit.springboot_study.service;
 
 import com.korit.springboot_study.dto.request.study.ReqAddInstructorDto;
 import com.korit.springboot_study.dto.request.study.ReqAddMajorDto;
+import com.korit.springboot_study.dto.request.study.ReqUpdateMajorDto;
 import com.korit.springboot_study.dto.response.common.NotFoundResponseDto;
 import com.korit.springboot_study.dto.response.common.ResponseDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
@@ -45,11 +46,21 @@ public class StudentStudyService {
                         .orElseThrow()
         );
     }
-
-    public SuccessResponseDto<Instructor> addInstructor(ReqAddInstructorDto reqAddInstructorDto) {
+    @Transactional(rollbackFor = Exception.class)
+    public SuccessResponseDto<Instructor> addInstructor(ReqAddInstructorDto reqAddInstructorDto) throws DuplicateKeyException {
         return new SuccessResponseDto<>(
                 studentStudyRepository
                         .saveInstructor(new Instructor(0, reqAddInstructorDto.getInstructorName()))
+                        .get()
+        );
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public SuccessResponseDto<Major> updateMajor(int majorId, ReqUpdateMajorDto reqUpdateMajorDto) throws NullPointerException {
+        System.out.println("서비스 호출");
+        return new SuccessResponseDto<>(
+                studentStudyRepository
+                        .updateMajor(majorId, new Major(majorId, reqUpdateMajorDto.getMajorName()))
                         .get()
         );
     }
