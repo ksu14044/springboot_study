@@ -9,9 +9,20 @@
         <id property="bookId" column="book_id" />
         <result property="bookName" column="book_name" />
         <result property="authorId" column="author_id" />
+        <result property="isbn" column="isbn" />
+        <result property="categoryId" column="category_id" />
         <result property="publisherId" column="publisher_id"/>
-    </resultMap>
+        <result property="bookImgUrl" column="book_img_url" />
 
+    </resultMap>
+    <select id="getBookByName" resultMap="bookResultMap">
+        select
+        *
+        from
+        book_tb
+        where
+        book_name like concat('%', #{bookName}, '%')
+    </select>
     <insert id="addBook" keyProperty="bookId">
         insert into
             book_tb
@@ -19,12 +30,4 @@
             (default, #{bookName}, #{authorId}, 0, 4000,  #{publisherId}, 'http://test.com')
     </insert>
 
-    <select id="getBookByName" resultMap="bookResultMap">
-        select
-            *
-        from
-            book_tb
-        where
-        book_name like concat('%', #{bookName}, '%')
-    </select>
 </mapper>

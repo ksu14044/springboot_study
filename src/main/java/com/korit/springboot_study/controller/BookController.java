@@ -1,10 +1,14 @@
 package com.korit.springboot_study.controller;
 
 import com.korit.springboot_study.dto.request.ReqAddBookDTO;
+import com.korit.springboot_study.dto.request.ReqAddCategoryDto;
 import com.korit.springboot_study.dto.request.ReqFindBookDTO;
+import com.korit.springboot_study.dto.request.ReqSearchCategoryDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
 import com.korit.springboot_study.entity.Book;
+import com.korit.springboot_study.entity.Category;
 import com.korit.springboot_study.service.BookService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +23,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@Validated
+@Api(tags ="Book API")
 public class BookController {
 
     @Autowired
@@ -38,4 +42,6 @@ public class BookController {
     public ResponseEntity<SuccessResponseDto<Optional<Book>>> addBook(@RequestBody @Valid ReqAddBookDTO reqAddBookDTO) throws MethodArgumentNotValidException {
         return ResponseEntity.ok().body(bookService.addBook(reqAddBookDTO));
     }
+
+
 }

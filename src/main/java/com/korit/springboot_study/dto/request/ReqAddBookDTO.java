@@ -6,5 +6,8 @@ import lombok.Data;
 public class ReqAddBookDTO {
     private String bookName;
     private int authorId;
+    private String isbn;
+    private int categoryId;
     private int publisherId;
+    private String bookImgUrl;
 }

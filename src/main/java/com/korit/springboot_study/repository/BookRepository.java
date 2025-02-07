@@ -1,8 +1,11 @@
 package com.korit.springboot_study.repository;
 
 import com.korit.springboot_study.entity.Book;
+import com.korit.springboot_study.entity.Category;
+import com.korit.springboot_study.exception.CustomDuplicateKeyException;
 import com.korit.springboot_study.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +30,8 @@ public class BookRepository {
 
     public Optional<Book> addBook(Book book) {
         bookMapper.addBook(book);
-        return Optional.ofNullable(new Book(book.getBookId(), book.getBookName(), book.getAuthorId(), book.getPublisherId()));
+        return Optional.ofNullable(new Book(book.getBookId(), book.getBookName(), book.getAuthorId(),book.getIsbn(),book.getCategoryId(), book.getPublisherId(), book.getBookImgUrl()));
     }
+
+
 }

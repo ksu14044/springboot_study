@@ -6,15 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Book {
-    private int bookId;
-    private String bookName;
-    private int authorId;
-    private String isbn;
+public class Category {
     private int categoryId;
-    private int publisherId;
-    private String bookImgUrl;
+    private String categoryName;
 }
