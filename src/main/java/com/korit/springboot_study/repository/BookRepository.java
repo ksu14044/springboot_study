@@ -19,19 +19,19 @@ public class BookRepository {
     @Autowired
     private BookMapper bookMapper;
 
-    public Optional<List<Book>> findBookByName(Book book) {
-        System.out.println("레퍼지토리 호출");
-        List<Book> foundBooks = bookMapper.getBookByName(book);
+    public Optional<Book> save(Book book) {
+        try {
+            bookMapper.insert(book);
+        }catch (DuplicateKeyException e){
+            return Optional.empty();
+        }
+        return Optional.of(book);
+    }
 
-        return foundBooks.isEmpty()
+    public Optional<List<Book>> findAllByNameContaining(String bookName) {
+        System.out.println(bookName);
+        return bookMapper.selectAllByNameContaining(bookName).isEmpty()
                 ? Optional.empty()
-                : Optional.of(foundBooks);
+                : Optional.of(bookMapper.selectAllByNameContaining(bookName));
     }
-
-    public Optional<Book> addBook(Book book) {
-        bookMapper.addBook(book);
-        return Optional.ofNullable(new Book(book.getBookId(), book.getBookName(), book.getAuthorId(),book.getIsbn(),book.getCategoryId(), book.getPublisherId(), book.getBookImgUrl()));
-    }
-
-
 }

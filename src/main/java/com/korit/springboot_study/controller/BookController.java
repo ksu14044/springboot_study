@@ -1,24 +1,19 @@
 package com.korit.springboot_study.controller;
 
-import com.korit.springboot_study.dto.request.ReqAddBookDTO;
-import com.korit.springboot_study.dto.request.ReqAddCategoryDto;
-import com.korit.springboot_study.dto.request.ReqFindBookDTO;
-import com.korit.springboot_study.dto.request.ReqSearchCategoryDto;
+import com.korit.springboot_study.dto.request.ReqAddBookDto;
+import com.korit.springboot_study.dto.request.ReqSearchBookDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
 import com.korit.springboot_study.entity.Book;
-import com.korit.springboot_study.entity.Category;
 import com.korit.springboot_study.service.BookService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,21 +22,18 @@ import java.util.Optional;
 public class BookController {
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
+    @ApiOperation(value = "도서 추가")
+    @PostMapping("/api/book")
+    public ResponseEntity<SuccessResponseDto<Book>> addBook(@Valid @RequestBody ReqAddBookDto reqAddBookDto) {
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(bookService.addBook(reqAddBookDto)));
+    }
+
+    @ApiOperation(value = "도서 검색")
     @GetMapping("/api/books")
-    @ApiOperation(value = "도서 조회")
-    public ResponseEntity<SuccessResponseDto<List<Book>>> getBooksByName(@RequestParam(required = false) String bookName) throws NotFoundException {
-        System.out.println("컨트롤러 호출");
-        ReqFindBookDTO reqFindBookDTO = new ReqFindBookDTO();
-        reqFindBookDTO.setBookName(bookName);
-        return ResponseEntity.ok().body(bookService.getBookByName(reqFindBookDTO));
+    public ResponseEntity<SuccessResponseDto<List<Book>>> searchBook(@ModelAttribute ReqSearchBookDto searchBookDto) throws Exception {
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(bookService.getBooks(searchBookDto)));
     }
-    
-    @PostMapping("/api/books")
-    public ResponseEntity<SuccessResponseDto<Optional<Book>>> addBook(@RequestBody @Valid ReqAddBookDTO reqAddBookDTO) throws MethodArgumentNotValidException {
-        return ResponseEntity.ok().body(bookService.addBook(reqAddBookDTO));
-    }
-
 
 }

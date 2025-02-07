@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface BookMapper {
-    List<Book> getBookByName(Book book);
-    int addBook(Book book);
+    int insert(Book book);
+    List<Book> selectAllByNameContaining(@Param(value = "bookName") String bookName);
 
 }

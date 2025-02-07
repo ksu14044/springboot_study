@@ -1,16 +1,16 @@
 package com.korit.springboot_study.service;
 
 
-import com.korit.springboot_study.dto.request.ReqAddBookDTO;
-import com.korit.springboot_study.dto.request.ReqAddCategoryDto;
-import com.korit.springboot_study.dto.request.ReqFindBookDTO;
-import com.korit.springboot_study.dto.request.ReqSearchCategoryDto;
+import com.korit.springboot_study.dto.request.ReqAddBookDto;
+import com.korit.springboot_study.dto.request.ReqSearchBookDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
 import com.korit.springboot_study.entity.Book;
-import com.korit.springboot_study.entity.Category;
+import com.korit.springboot_study.exception.CustomDuplicateKeyException;
+import com.korit.springboot_study.mapper.BookMapper;
 import com.korit.springboot_study.repository.BookRepository;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,22 +19,18 @@ import java.util.Optional;
 @Service
 public class BookService {
 
-   @Autowired
-   BookRepository bookRepository;
+    @Autowired
+    private BookRepository bookRepository;
 
-   public SuccessResponseDto<List<Book>> getBookByName(ReqFindBookDTO reqFindBookDTO) throws NotFoundException {
-       System.out.println("서비스 호출");
-       List<Book> foundBooks = bookRepository.findBookByName(new Book(0, reqFindBookDTO.getBookName(),0,"",0,0,"")).orElseThrow(() -> new NotFoundException("도서정보가 존재하지 않습니다."));
+    public Book addBook(ReqAddBookDto reqAddBookDto) {
+        return bookRepository
+                .save(reqAddBookDto.toBook())
+                .orElseThrow(() -> new CustomDuplicateKeyException("이미 존재하는 도서명입니다."));
+    }
 
-       return new SuccessResponseDto<>(foundBooks);
-   }
-   
-   public SuccessResponseDto<Optional<Book>> addBook(ReqAddBookDTO reqAddBookDTO) {
-     return new SuccessResponseDto<>(
-             bookRepository.addBook(new Book(0, reqAddBookDTO.getBookName(), reqAddBookDTO.getAuthorId(), reqAddBookDTO.getIsbn(), reqAddBookDTO.getCategoryId(),reqAddBookDTO.getPublisherId(), reqAddBookDTO.getBookImgUrl()))
-     );
-   }
-
-
+    public List<Book> getBooks(ReqSearchBookDto reqSearchBookDto) throws Exception {
+        return bookRepository.findAllByNameContaining(reqSearchBookDto.getKeyword())
+                .orElseThrow(() -> new NotFoundException("조회된 도서가 없습니다."));
+    }
 
 }
