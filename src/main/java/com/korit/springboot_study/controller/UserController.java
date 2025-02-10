@@ -7,8 +7,11 @@ import com.korit.springboot_study.entity.User;
 import com.korit.springboot_study.service.UserService;
 import com.sun.net.httpserver.Authenticator;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 
+import io.swagger.annotations.ApiParam;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 @RestController
 @Api(tags = "사용자 정보 API")
@@ -46,17 +50,25 @@ public class UserController {
     @ApiOperation(value = "사용자 ID로 조회")
     public ResponseEntity<SuccessResponseDto<User>> getUser(
             @Min(value = 1, message = "사용자 ID는 1이상의 정수입니다.")
-            @PathVariable int userId) {
-        return ResponseEntity.ok().body(new SuccessResponseDto<>(null));
+            @ApiParam(value = "사용자 ID" , example = "1", required = true)
+            @PathVariable int userId) throws NotFoundException {
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(userService.getUserById(userId)));
+    }
+
+    @GetMapping("api/users")
+    @ApiOperation(value = "사용자 전체 조회")
+    public ResponseEntity<SuccessResponseDto<List<User>>> getAllUsers() throws NotFoundException {
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(userService.getAllUsers()));
     }
 
     @PutMapping("/api/user/{userId}")
     @ApiOperation(value = "사용자 수정")
-    public ResponseEntity<SuccessResponseDto<User>> modifyUser(
+    public ResponseEntity<SuccessResponseDto<?>> modifyUser(
             @Min(value = 1, message = "사용자 ID는 1 이상의 정수입니다.")
+            @ApiParam(value = "사용자 ID" , example = "1", required = true)
             @PathVariable int userId,
             @Valid @RequestBody ReqModifyUserDto reqModifyUserDto
-    ) {
-        return ResponseEntity.ok().body(new SuccessResponseDto<>(null));
+    ) throws NotFoundException, MethodArgumentNotValidException {
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(userService.modifyUser(userId, reqModifyUserDto)));
     }
 }
