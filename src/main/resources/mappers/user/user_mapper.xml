@@ -42,6 +42,13 @@
         where
             user_id = #{userId}
     </update>
+    <delete id="deleteById">
+        delete
+        from
+            user_tb
+        where
+            user_id = #{userId}
+    </delete>
 
     <select id="selectByUsername" resultMap="userResultMap">
         select

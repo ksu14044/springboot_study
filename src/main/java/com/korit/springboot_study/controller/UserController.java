@@ -71,4 +71,14 @@ public class UserController {
     ) throws NotFoundException, MethodArgumentNotValidException {
         return ResponseEntity.ok().body(new SuccessResponseDto<>(userService.modifyUser(userId, reqModifyUserDto)));
     }
+
+    @DeleteMapping("/api/user/{userId}")
+    @ApiOperation(value = "사용자 삭제")
+    public ResponseEntity<SuccessResponseDto<?>> deleteUser(
+            @Min(value = 1, message = "사용자 ID는 1 이상의 정수입니다.")
+            @ApiParam(value = "사용자 ID" , example = "1", required = true)
+            @PathVariable int userId) throws NotFoundException {
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(userService.deleteUser(userId)));
+    }
+
 }

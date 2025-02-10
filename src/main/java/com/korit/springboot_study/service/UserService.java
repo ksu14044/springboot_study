@@ -54,4 +54,9 @@ public class UserService {
     public Boolean modifyUser(int userId, ReqModifyUserDto reqModifyUserDto) throws NotFoundException{
         return userRepository.updateUserById(reqModifyUserDto.toUser(userId)).orElseThrow(() -> new NotFoundException("해당 사용자 ID는 존재하지 않습니다."));
     }
+
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean deleteUser(int userId) throws NotFoundException {
+        return userRepository.deleteUserById(userId).orElseThrow(() -> new NotFoundException("해당 사용자 ID는 존재하지 않습니다."));
+    }
 }

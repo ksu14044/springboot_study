@@ -41,4 +41,9 @@ public class UserRepository {
     public Optional<Boolean> updateUserById(User user) {
         return userMapper.updateUserById(user) < 1 ? Optional.empty() : Optional.of(true);
     }
+
+    public Optional<Boolean> deleteUserById(int userId) {
+        return userMapper.deleteById(userId) < 1 ? Optional.empty() : Optional.of(true);
+    }
 }
+
