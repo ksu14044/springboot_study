@@ -1,6 +1,5 @@
 package com.korit.springboot_study.exception;
 
-import ch.qos.logback.core.pattern.color.MagentaCompositeConverter;
 import lombok.Getter;
 import org.springframework.dao.DuplicateKeyException;
 

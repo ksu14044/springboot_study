@@ -1,5 +1,6 @@
 package com.korit.springboot_study.service;
 
+import com.korit.springboot_study.aspect.annotation.PrintParamsAop;
 import com.korit.springboot_study.dto.request.ReqCreatePostDto;
 import com.korit.springboot_study.entity.Post;
 import com.korit.springboot_study.entity.PostLike;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StopWatch;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,11 +33,16 @@ public class PostService {
         return postRepository.save(reqCreatePostDto.toPost()).get();
     }
 
+    @PrintParamsAop
     public Post getPostById(int postId) throws NotFoundException {
-        return postRepository.findById(postId)
+
+        Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException("해당 postId의 게시글이 존재하지 않습니다."));
+
+        return post;
     }
 
+    @PrintParamsAop
     public List<Post> getAllPostsByKeywordContaining(int page, int size, String keyword) throws NotFoundException {
         int startIndex = (page - 1) * size;
         List<Post> posts = postRepository.findAllByKeywordContaining(startIndex, size, keyword)
