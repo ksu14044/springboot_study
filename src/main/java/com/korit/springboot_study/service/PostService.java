@@ -2,6 +2,10 @@ package com.korit.springboot_study.service;
 
 import com.korit.springboot_study.dto.request.ReqCreatePostDto;
 import com.korit.springboot_study.entity.Post;
+import com.korit.springboot_study.entity.PostLike;
+import com.korit.springboot_study.exception.CustomDuplicateKeyException;
+import com.korit.springboot_study.exception.CustomNullPointException;
+import com.korit.springboot_study.repository.PostLikeRepository;
 import com.korit.springboot_study.repository.PostRepository;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    @Autowired
+    private PostLikeRepository postLikeRepository;
 
     @Transactional(rollbackFor = Exception.class)
     public Post createPost(ReqCreatePostDto reqCreatePostDto) {
@@ -34,5 +42,14 @@ public class PostService {
                 .orElseThrow(() -> new NotFoundException("검색된 게시글이 없습니다."));
 
         return posts;
+    }
+
+    public Boolean likePost(int postId, int userId) throws Exception {
+        PostLike postLike = PostLike.builder()
+                .postId(postId)
+                .userId(userId)
+                .build();
+        return postLikeRepository.save(postLike)
+                .orElseThrow(() -> new CustomDuplicateKeyException("", Map.of("message", "해당 게시글을 이미 like 하였습니다.")));
     }
 }

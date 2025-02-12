@@ -44,8 +44,9 @@ public class PostController {
     }
 
     @PostMapping("/api/post/{postId}/like")
-    public ResponseEntity<SuccessResponseDto<Post>> likePost(@PathVariable int postId) throws NotFoundException {
-        return ResponseEntity.ok().body(new SuccessResponseDto<>(null));
+    public ResponseEntity<SuccessResponseDto<Boolean>> likePost(@PathVariable int postId) throws Exception {
+        int userId = 2;
+        return ResponseEntity.ok().body(new SuccessResponseDto<>(postService.likePost(postId, userId)));
     }
 
     @DeleteMapping("/api/post/{postId}/like")
