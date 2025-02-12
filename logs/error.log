@@ -1,0 +1,28 @@
+2025-02-12 12:31:40.985 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:32:21.017 [http-nio-8080-exec-3] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:33:49.969 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:40:31.161 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:40:41.114 [http-nio-8080-exec-2] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:41:04.454 [http-nio-8080-exec-4] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:41:04.460 [http-nio-8080-exec-4] ERROR com.korit.springboot_study.aspect.LoggingAspect - [Ljava.lang.StackTraceElement;@7fe9cd7e
+2025-02-12 12:42:58.976 [http-nio-8080-exec-6] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:42:58.979 [http-nio-8080-exec-6] ERROR com.korit.springboot_study.aspect.LoggingAspect - [Ljava.lang.StackTraceElement;@ad2e768
+2025-02-12 12:42:59.266 [http-nio-8080-exec-7] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:42:59.271 [http-nio-8080-exec-7] ERROR com.korit.springboot_study.aspect.LoggingAspect - [Ljava.lang.StackTraceElement;@393eee5e
+2025-02-12 12:44:25.728 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:44:25.990 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.LoggingAspect - 해당 postId의 게시글이 존재하지 않습니다.
+2025-02-12 12:47:56.429 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 12:48:06.917 [http-nio-8080-exec-2] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:29:31.938 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:29:44.677 [http-nio-8080-exec-4] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:29:50.168 [http-nio-8080-exec-6] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:29:54.485 [http-nio-8080-exec-10] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:30:05.956 [http-nio-8080-exec-5] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:30:35.736 [http-nio-8080-exec-7] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:32:58.730 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:44:20.917 [http-nio-8080-exec-6] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:44:25.453 [http-nio-8080-exec-2] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:44:31.129 [http-nio-8080-exec-3] ERROR com.korit.springboot_study.aspect.PrintParamAspect - 로그를 출력합니다.
+2025-02-12 14:47:13.902 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.LoggingAspect - 해당 사용자 ID는 존재하지 않습니다
+2025-02-12 14:47:16.697 [http-nio-8080-exec-1] ERROR com.korit.springboot_study.aspect.LoggingAspect - 해당 사용자 ID는 존재하지 않습니다
+2025-02-12 15:19:17.210 [http-nio-8080-exec-2] ERROR com.korit.springboot_study.aspect.LoggingAspect - 해당 사용자 ID는 존재하지 않습니다

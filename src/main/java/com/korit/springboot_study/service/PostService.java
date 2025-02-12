@@ -8,6 +8,7 @@ import com.korit.springboot_study.exception.CustomDuplicateKeyException;
 import com.korit.springboot_study.exception.CustomNullPointException;
 import com.korit.springboot_study.repository.PostLikeRepository;
 import com.korit.springboot_study.repository.PostRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class PostService {
 
     @Autowired
@@ -35,7 +37,7 @@ public class PostService {
 
     @PrintParamsAop
     public Post getPostById(int postId) throws NotFoundException {
-
+        log.info("getPostById");
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException("해당 postId의 게시글이 존재하지 않습니다."));
 
