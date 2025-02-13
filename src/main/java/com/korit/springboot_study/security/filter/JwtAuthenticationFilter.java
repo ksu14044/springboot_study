@@ -33,6 +33,7 @@ public class JwtAuthenticationFilter implements Filter {
         String authorization = request.getHeader("Authorization");
 
         if(jwtProvider.validateToken(authorization)) {
+
             setJwtAuthentication(authorization);
         }
 
@@ -40,11 +41,15 @@ public class JwtAuthenticationFilter implements Filter {
     }
 
     private void setJwtAuthentication(String bearerToken) {
+
         Claims claims = jwtProvider.parseToken(bearerToken);
+
         if(claims == null) {
             throw new JwtException("Invalid JWT token");
         }
+
         int userId = Integer.parseInt(claims.get("userId").toString());
+
         userRepository.findById(userId).ifPresent(user -> {
           SecurityContext securityContext = SecurityContextHolder.getContext();
           PrincipalUser principalUser = new PrincipalUser(user);

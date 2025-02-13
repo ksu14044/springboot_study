@@ -56,19 +56,28 @@
 
     <select id="selectByUsername" resultMap="userResultMap">
         select
-            user_id,
-            username,
-            password,
-            name,
-            email
-            account_expired,
-            account_locked,
-            credentials_expired,
-            account_enabled
+            ut.user_id,
+            ut.username,
+            ut.password,
+            ut.name,
+            ut.email,
+            ut.account_expired,
+            ut.account_locked,
+            ut.credentials_expired,
+            ut.account_enabled,
+
+            urt.user_role_id,
+            urt.user_id,
+            urt.role_id,
+
+            rt.role_id,
+            rt.role_name
         from
-            user_tb
+            user_tb ut
+            left outer join user_role_tb urt on(urt.user_id = ut.user_id)
+            left outer join role_tb rt on(rt.role_id = urt.role_id)
         where
-            username = #{username}
+            ut.username = #{username}
     </select>
 
     <select id="selectById" resultMap="userResultMap">

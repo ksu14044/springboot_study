@@ -5,6 +5,7 @@ import com.korit.springboot_study.dto.response.common.NotFoundResponseDto;
 import com.korit.springboot_study.exception.CustomDuplicateKeyException;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,6 +28,11 @@ public class GlobalRestControllerAdvice {
     @ExceptionHandler(value = CustomDuplicateKeyException.class)
     public ResponseEntity<BadRequestResponseDto<?>> duplicateKey(CustomDuplicateKeyException e) {
         return ResponseEntity.status(400).body(new BadRequestResponseDto<>(e.getErrors()));
+    }
+
+    @ExceptionHandler(value = AuthenticationException.class)
+    public ResponseEntity<BadRequestResponseDto<?>> signinError(AuthenticationException e) {
+        return ResponseEntity.status(403).body(new BadRequestResponseDto<>(e.getMessage()));
     }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
