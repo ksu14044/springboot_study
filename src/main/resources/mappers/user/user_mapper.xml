@@ -12,6 +12,10 @@
         <result property="password" column="password" />
         <result property="name" column="name" />
         <result property="email" column="email" />
+        <result property="isAccountNonExpired" column="account_expired" />
+        <result property="isAccountNonLocked" column="account_locked" />
+        <result property="isCredentialsNonExpired" column="credentials_expired" />
+        <result property="isEnabled" column="account_enabled" />
         <collection property="userRoles" resultMap="userRoleResultMap" />
     </resultMap>
 
@@ -31,7 +35,7 @@
         insert into
             user_tb
         values
-            (default, #{username}, #{password}, #{name}, #{email})
+            (default, #{username}, #{password}, #{name}, #{email}, 1, 1, 1, 1)
     </insert>
 
     <update id="updateUserById">
@@ -57,6 +61,10 @@
             password,
             name,
             email
+            account_expired,
+            account_locked,
+            credentials_expired,
+            account_enabled
         from
             user_tb
         where
@@ -70,6 +78,10 @@
             ut.password,
             ut.name,
             ut.email,
+            ut.account_expired,
+            ut.account_locked,
+            ut.credentials_expired,
+            ut.account_enabled,
 
             urt.user_role_id,
             urt.user_id,
@@ -92,6 +104,10 @@
             ut.password,
             ut.name,
             ut.email,
+            ut.account_expired,
+            ut.account_locked,
+            ut.credentials_expired,
+            ut.account_enabled,
 
             urt.user_role_id,
             urt.user_id,

@@ -19,6 +19,8 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     @Autowired
     private ObjectMapper objectMapper = new ObjectMapper();
 
+
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         System.out.println("인증 예외 발생");
