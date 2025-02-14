@@ -18,6 +18,6 @@ public class ClassB {
 
     public void classCallB() {
         System.out.println("ClassB 메소드 호출");
-
+        c1.classCallC();
     }
 }
